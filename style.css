@@ -1,0 +1,45 @@
+const chatBox = document.getElementById('chat-box');
+const userInput = document.getElementById('user-input');
+const sendBtn = document.getElementById('send-btn');
+
+// Dữ liệu mẫu (Có thể tách ra file data.json)
+const faqData = {
+    "greetings": "Xin chào! Tôi là hướng dẫn viên ảo của Đền Đức Thánh Cả. Bạn muốn tìm hiểu về lịch sử, kiến trúc hay lễ hội của đền?",
+    "thờ ai": "Đền Đức Thánh Cả thờ vị thành hoàng làng có công lớn với dân tộc và địa phương, giữ gìn bình yên cho vùng đất Đức Hợp.",
+    "ở đâu": "Đền nằm tại thôn Trung Hòa, xã Đức Hợp, huyện Kim Động, tỉnh Hưng Yên.",
+    "lễ hội": "Lễ hội Đền Đức Thánh Cả thường diễn ra vào tháng Giêng âm lịch với nhiều nghi thức tế lễ và trò chơi dân gian đặc sắc.",
+    "default": "Xin lỗi, tôi chưa hiểu ý bạn. Bạn có thể hỏi về 'vị trí', 'người được thờ' hoặc 'thời gian lễ hội' được không?"
+};
+
+function addMessage(text, sender) {
+    const msgDiv = document.createElement('div');
+    msgDiv.classList.add('message', sender);
+    msgDiv.innerText = text;
+    chatBox.appendChild(msgDiv);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function handleChat() {
+    const text = userInput.value.toLowerCase().trim();
+    if (!text) return;
+
+    addMessage(userInput.value, 'user');
+    userInput.value = '';
+
+    // Logic tìm câu trả lời đơn giản
+    setTimeout(() => {
+        let reply = faqData.default;
+        if (text.includes("xin chào") || text.includes("hi")) reply = faqData.greetings;
+        else if (text.includes("thờ ai") || text.includes("thành hoàng")) reply = faqData["thờ ai"];
+        else if (text.includes("địa chỉ") || text.includes("ở đâu")) reply = faqData["ở đâu"];
+        else if (text.includes("lễ hội")) reply = faqData["lễ hội"];
+
+        addMessage(reply, 'bot');
+    }, 500);
+}
+
+sendBtn.onclick = handleChat;
+userInput.onkeypress = (e) => { if (e.key === 'Enter') handleChat(); };
+
+// Chào mừng khi vừa vào web
+window.onload = () => addMessage(faqData.greetings, 'bot');

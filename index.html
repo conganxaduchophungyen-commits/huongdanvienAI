@@ -1,1 +1,28 @@
-
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Đền Đức Thánh Cả</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="chat-container">
+        <header>
+            <h3>⛩️ Hướng Dẫn Viên Đền Đức Thánh Cả</h3>
+        </header>
+        <div id="chat-box">
+            </div>
+        <div id="quick-suggestions">
+            <button onclick="askFAQ('Đền thờ ai?')">Đền thờ ai?</button>
+            <button onclick="askFAQ('Đường đi?')">Đường đi?</button>
+            <button onclick="askFAQ('Lễ hội?')">Lễ hội?</button>
+        </div>
+        <div id="input-area">
+            <input type="text" id="user-input" placeholder="Hỏi tôi về di tích...">
+            <button id="send-btn">Gửi</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
